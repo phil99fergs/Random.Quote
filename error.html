@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Quote Generator</title>
+</head>
+<body>
+    <h1>Random Quote Generator</h1>
+    {% if quote %}
+        <p>"{{ quote.text }}" - {{ quote.author }}</p>
+    {% else %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <br>
+    <a href="{{ url_for('index') }}">Back</a>
+</body>
+</html>
