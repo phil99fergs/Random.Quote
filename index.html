@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Quote Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $("#generate-quote-button").click(function(event) {
+                event.preventDefault();
+                var author = $("#author-input").val();
+                $.getJSON("/quote", {"author": author}, function(data) {
+                    if ("error" in data) {
+                        $("#quote-text").text("");
+                        $("#quote-author").text("");
+                        $("#error-message").text(data.error);
+                    } else {
+                        $("#error-message").text("");
+                        $("#quote-text").text(data.text);
+                        $("#quote-author").text(data.author);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Random Quote Generator</h1>
+    <form>
+        <label for="author-input">Enter an author (leave blank for any):</label>
+        <input type="text" id="author-input" name="author">
+        <button id="generate-quote-button">Generate Quote</button>
+    </form>
+    <div id="error-message"></div>
+    <div id="quote">
+        <p id="quote-text"></p>
+        <p id="quote-author"></p>
+    </div>
+</body>
+</html>
